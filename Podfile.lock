@@ -1,0 +1,24 @@
+PODS:
+  - FXKeychain (1.5.3)
+  - StepSlider (1.8.0)
+  - UICollectionViewLeftAlignedLayout (1.0.2)
+
+DEPENDENCIES:
+  - FXKeychain
+  - StepSlider
+  - UICollectionViewLeftAlignedLayout
+
+SPEC REPOS:
+  trunk:
+    - FXKeychain
+    - StepSlider
+    - UICollectionViewLeftAlignedLayout
+
+SPEC CHECKSUMS:
+  FXKeychain: 2fe54573946ffef634f4e2a2851e6c8f4ea15e76
+  StepSlider: 890db727e779fa99cb32afffc5887c1109e151f4
+  UICollectionViewLeftAlignedLayout: 830bf6fa5bab9f9b464f62e3384f9d2e00b3c0f6
+
+PODFILE CHECKSUM: 8c48772e517b3af57787893708a8f48c3d01e2df
+
+COCOAPODS: 1.10.0
