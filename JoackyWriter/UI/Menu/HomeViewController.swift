@@ -22,8 +22,29 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewWillTransition(to: size, with: coordinator)
     }
     
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+//        let button = UIButton(type: .roundedRect)
+//             button.frame = CGRect(x: 20, y: 50, width: 100, height: 30)
+//             button.setTitle("Test Crash", for: [])
+//             button.addTarget(self, action: #selector(self.crashButtonTapped(_:)), for: .touchUpInside)
+//             view.addSubview(button)
+//         }
+//
+//         @IBAction func crashButtonTapped(_ sender: AnyObject) {
+//             let numbers = [0]
+//             let _ = numbers[1]
+         }
+    
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = UIColor.black
         
         Sounds.default.playMusic()
         
@@ -170,12 +191,31 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
+        } else if (indexPath.section == 1 && indexPath.row == 5) {
+            
+            let storyboard = UIStoryboard.init(name: "WriteStoryboard", bundle: nil)
+            
+            let vc = storyboard.instantiateViewController(withIdentifier: "SpeakingCal")
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         }
         else if (indexPath.section == 1 && indexPath.row == 6) {
             
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "ChoiceCategoryViewController") as! ChoiceCategoryViewController
+            let storyboard = UIStoryboard.init(name: UIDevice.current.userInterfaceIdiom == .pad ? "iPad_Choice" : "iPhone_Choice", bundle: nil)
             
-            self.navigationController?.pushViewController(vc, animated: true)
+            let vc = storyboard.instantiateViewController(withIdentifier: "NewChoiceVC")
+            
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .fullScreen
+            
+            self.present(vc, animated: true, completion: nil)
+            
+            
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "ChoiceCategoryViewController") as! ChoiceCategoryViewController
+//
+//            self.navigationController?.pushViewController(vc, animated: true)
            // self .checkDropBoxLink()
             
         }
@@ -183,6 +223,31 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "TextToSpeechVC")
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        } else if (indexPath.section == 1 && indexPath.row == 8) {
+            
+//            let storyboard = UIStoryboard.init(name: "WriteStoryboard", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "TempViewController")
+//            self.navigationController?.pushViewController(vc, animated: true)
+            let storyboard = UIStoryboard.init(name: "WriteStoryboard", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "WriteBoardViewController")
+         // let navigationController = UINavigationController(rootViewController: vc)
+          
+            self.navigationController?.pushViewController(vc, animated: true)
+//          vc.modalPresentationStyle = .fullScreen
+//          self.present(vc, animated: true, completion: nil)
+        } else if (indexPath.section == 1 && indexPath.row == 9) {
+            
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "CropViewController")
+            self.navigationController?.pushViewController(vc, animated: true)
+
+            
+        } else if (indexPath.section == 1 && indexPath.row == 10) {
+            
+            let storyboard = UIStoryboard.init(name: "Main_choice", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "NewChoiceVC")
             self.navigationController?.pushViewController(vc, animated: true)
             
         }
@@ -198,7 +263,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         if section == 0 {
             return 2
         }
-        return 8
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -208,7 +273,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 cell.nameLabel.text = Account.name != nil && Account.name!.count > 0 ? Account.name : "You"
                 cell.photoImageView.layer.cornerRadius = Utils.isPad ? 60.0 : 35.0
                 cell.photoImageView.layer.borderWidth = Utils.isPad ? 4.0 : 2.0
-                cell.photoImageView.layer.borderColor = UIColor.skyBlue.cgColor
+                cell.photoImageView.layer.borderColor = UIColor.black.cgColor
                 cell.photoImageView.layer.masksToBounds = true
                 if let recognizers = cell.photoImageView.gestureRecognizers {
                     for rec in recognizers {
@@ -222,13 +287,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     cell.photoImageView.image = photo
                 }
                 else {
-                    cell.photoImageView.image = UIImage.init(named: "I am")
+                    cell.photoImageView.image = UIImage.init(named: "ic_edit")
                 }
                 return cell
             }
             else {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InstructionsCell", for: indexPath)
-                cell.contentView.backgroundColor = UIColor.init(red: 0.05, green: 0.3, blue: 0.5, alpha: 1.0)
+                cell.contentView.backgroundColor = .black//UIColor.init(red: 0.05, green: 0.3, blue: 0.5, alpha: 1.0)
                 cell.contentView.layer.cornerRadius = 20.0
                 cell.contentView.layer.borderWidth = Utils.isPad ? 4.0 : 2.0
                 cell.contentView.layer.borderColor = UIColor.wood.cgColor
@@ -247,13 +312,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             case 5: identifier = "MathCell"
             case 6: identifier = "JournalCell"
             case 7: identifier = "TextToSpeechCell"
+            case 8: identifier = "WriteBoardCell"
+            case 9: identifier = "ScanToTextCell"
+            case 10: identifier = "ChoiceTempCell"
             default:
                 break
             }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
                                                           for: indexPath) as! PuzzleCell
-            cell.titleLabel.font = UIFont.init(name: "BadaBoom BB",
-                                               size: Utils.isPad ? 40.0 : 20.0)
+           // cell.titleLabel.font = UIFont.init(name: "ObelixProBIt cyr",
+              //                                 size: Utils.isPad ? 40.0 : 20.0)
             return cell
         }
     }
@@ -316,8 +384,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     // MARK: - UIImagePickerControllerDelegate
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             Account.photo = pickedImage
             collectionView.reloadData()
         }

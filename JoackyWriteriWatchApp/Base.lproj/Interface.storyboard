@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="20037" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38"/>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="20006"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="JoackyWriteriWatchApp" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="vertical" spacing="8" id="h91-O6-C0I">
+                            <items>
+                                <imageView width="1" height="0.80000000000000004" alignment="left" image="ic_joackyWriter" contentMode="scaleAspectFit" id="QnS-yJ-nle"/>
+                                <label width="1" height="0.20000000000000001" alignment="left" text="Please Add Choice" textAlignment="center" minimumScaleFactor="0.5" id="Im8-d4-6SH">
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                            </items>
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer direction="4" id="pO6-LG-LAO">
+                                    <connections>
+                                        <action selector="swipeUp:" destination="AgC-eL-Hgc" id="GmG-cT-Ae6"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <swipeGestureRecognizer direction="8" id="iLi-NL-hU7">
+                                    <connections>
+                                        <action selector="swipeDown:" destination="AgC-eL-Hgc" id="xfB-dD-izX"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <tapGestureRecognizer id="sbH-MD-Wwr">
+                                    <connections>
+                                        <action selector="tapGesture:" destination="AgC-eL-Hgc" id="UuP-Iw-1N6"/>
+                                    </connections>
+                                </tapGestureRecognizer>
+                                <longPressGestureRecognizer id="Y4b-7K-aXF">
+                                    <connections>
+                                        <action selector="longPressGesture:" destination="AgC-eL-Hgc" id="5Fq-ub-esn"/>
+                                    </connections>
+                                </longPressGestureRecognizer>
+                            </gestureRecognizers>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="img" destination="QnS-yJ-nle" id="fr5-BH-8Lt"/>
+                        <outlet property="lbl" destination="Im8-d4-6SH" id="Bao-fD-AWP"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="345"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                        <segue destination="eXb-UN-Cd0" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="mpB-YA-K8N"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="JoackyWriteriWatchApp" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="Niz-AI-uX2">
+            <objects>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="JoackyWriteriWatchApp" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="345"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_joackyWriter" width="128" height="128"/>
+    </resources>
+</document>
